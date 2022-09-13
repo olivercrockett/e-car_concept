@@ -67,6 +67,8 @@ loader.load( './chassis.gltf', function ( gltf ) {
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(10,5,5);
 scene.add(pointLight);
+
+// Light helper
 // const lighthelper = new THREE.PointLightHelper(pointLight);
 // scene.add(lighthelper);
 
@@ -83,11 +85,17 @@ function animate() {
   if (t > -2000) scene.rotation.y += -0.03;
   else scene.rotation.y = -3.14519/7;
 
-  // zoom into front wheel
-  if (t < -4000 && t > -5000) {
+  // zoom into front or rear wheel
+  if (t < -2000 && t > -3000) {
+    camera.position.setZ(2.3);
+    camera.position.setX(-0.8);
+    camera.position.setY(-0.5);
+    scene.rotation.y = 3.14519/7;
+  } else if (t < -4000 && t > -5000) {
     camera.position.setZ(2.3);
     camera.position.setX(0.8);
     camera.position.setY(-0.5);
+    scene.rotation.y = -3.14519/7;
   } else {
     camera.position.setZ(4);
     camera.position.setX(0);
